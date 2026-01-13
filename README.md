@@ -97,7 +97,7 @@ Hyperparamètres optimisés via **GridSearchCV (CV = 5)**
 
 ### Évaluation
 Métriques reportées sur *train* et *test* :
-- **RMSE** (*Root Mean Squared Error*)  
+- **RMSE** (*Root Mean Squared Error*)__ Métrique principale
 - **MSE** (*Mean Squared Error*)  
 - **MAE** (*Mean Absolute Error*)  
 - **\(R^2\)** (*coefficient de détermination*)  
@@ -121,7 +121,6 @@ Pour capturer des relations complexes, nous avons exploré des approches basées
 Ces modèles ont offert les meilleurs résultats grâce à la combinaison d'estimateurs :
 * **Bagging** : Random Forest.
 * **Boosting** : AdaBoost, Gradient Boosting et les variantes de pointe (**XGBoost**, **LightGBM**, **CatBoost**).
-* **Résultat** : Le **CatBoost** s'est révélé être le modèle le plus robuste avec un $R^2$ de **0.8429**.
 
 ## Résultats clés
 Meilleur performance globale sur CatBoost sur la cible charges
