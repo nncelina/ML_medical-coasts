@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet - Machine learning - Modèles</title>
+    <link rel="stylesheet" href="CSS/Style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Machine Learning</div>
+        <ul class="nav-links">
+            <li><a href="Index.html">Accueil</a></li>
+            <li><a href="EDA.html">EDA</a></li>
+            <li><a href="Modèles.html" class="active">Modèles</a></li>
+            <li><a href="Prédiction.html">Prédiction</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Projet de Machine Learning</h1>
+            <h2>
+                Prévision des coûts médicaux (en $)
+                <span class="badge">Régression</span>
+            </h2>
+
+            <div class="decor-bars">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <p class="subtitle">Modèles</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <!-- SOUS-ONGLETS EDA -->
+        <div class="eda-tabs">
+            <a href="#presentation" class="eda-tab active">
+                Regression linéaire
+            </a>
+
+            <a href="#univariee" class="eda-tab">
+                Modèles non linéaires
+            </a>
+
+            <a href="#bivariee" class="eda-tab">
+                Modèles ensemblistes
+            </a>
+        </div>
+
+        <div class="eda-content">
+
+            <div id="presentation" class="eda-card">
+                <h4>Regression linéaire</h4>
+                <p>
+                   <strong>Résultats de la régression linéaire sur la variable charges</strong>
+                </p>
+                <br>
+                <div class="table-card">
+                    <h3>Résultat des métriques sur les données de test</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>MAE_test</th>
+                                <th>MAPE_test</th>
+                                <th>MSE_test</th>
+                                <th>R2_test</th>
+                                <th>RMSE_test</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4243.5419511325</td>
+                                <td>42.81589472519842</td>
+                                <td>37872327.68040882</td>
+                                <td>0.7331852481381023</td>
+                                <td>6154.0496975901015</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="table-card">
+                    <h3>Résultat des métriques sur les données d'entrainement</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>MAE_train</th>
+                                <th>MAPE_train</th>
+                                <th>MSE_train</th>
+                                <th>R2_train</th>
+                                <th>RMSE_train</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4142.365213600848</td>
+                                <td>41.47569730557002</td>
+                                <td>36264174.80573765</td>
+                                <td>0.7544700073208935</td>
+                                <td>6021.9743278876285</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <p>
+                   <strong>Résultats de la régression linéaire sur la variable log_charges</strong>
+                </p>
+                <br>
+                <div class="table-card">
+                    <h3>Résultat des métriques sur les données de test</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>MAE_test</th>
+                                <th>MAPE_test</th>
+                                <th>MSE_test</th>
+                                <th>R2_test</th>
+                                <th>RMSE_test</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4486.07113850547</td>
+                                <td>28.833917631705674</td>
+                                <td>74897217.05739257</td>
+                                <td>0.47234079317885813</td>
+                                <td>8654.317827384928</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="table-card">
+                    <h3>Résultat des métriques sur les données d'entrainement</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>MAE_train</th>
+                                <th>MAPE_train</th>
+                                <th>MSE_train</th>
+                                <th>R2_train</th>
+                                <th>RMSE_train</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4155.28912222124</td>
+                                <td>25.533482268157947</td>
+                                <td>68700508.95448557</td>
+                                <td>0.5348567683945507</td>
+                                <td>8288.577016260726</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="univariee" class="eda-card">
+                <h4>Modèles non linéaires</h4>
+                <p>
+                    Les tableaux ci-dessous récapitulent les résultats des métriques obtenus sur les modèles non linéaires, sur les données de test et d'entrainement.
+                </p>
+                <br>
+                <div class="table-card">
+                    <h3>Métriques des modèles non linéaires sur les données de test</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>best_params</th>
+      <th>R2_test</th>
+      <th>RMSE_test</th>
+      <th>MSE_test</th>
+      <th>MAE_test</th>
+      <th>MAPE_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Random Forest (log)</td>
+      <td>{'model__max_depth': None, 'model__min_samples_leaf': 10, 'model__n_estimators': 200, 'preprocessor__Scalers': RobustScaler()}</td>
+      <td>0.8349676882958189</td>
+      <td>4839.946621096298</td>
+      <td>23425083.295061473</td>
+      <td>2271.547357811977</td>
+      <td>18.276350449858253</td>
+    </tr>
+    <tr>
+      <td>Decision Tree (log)</td>
+      <td>{'model__max_depth': 5, 'model__min_samples_leaf': 20, 'preprocessor__Scalers': StandardScaler()}</td>
+      <td>0.8325325262689801</td>
+      <td>4875.524182150539</td>
+      <td>23770736.050734676</td>
+      <td>2411.1614364662046</td>
+      <td>20.79880015423358</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>{'model__max_depth': 5, 'model__min_samples_leaf': 20, 'preprocessor__Scalers': StandardScaler()}</td>
+      <td>0.8325325262689801</td>
+      <td>4875.524182150539</td>
+      <td>23770736.050734676</td>
+      <td>2411.1614364662046</td>
+      <td>20.79880015423358</td>
+    </tr>
+    <tr>
+      <td>Decision Tree</td>
+      <td>{'model__max_depth': 5, 'model__min_samples_leaf': 10, 'preprocessor__Scalers': MinMaxScaler()}</td>
+      <td>0.8257486383227972</td>
+      <td>4973.294423609486</td>
+      <td>24733657.423905216</td>
+      <td>2757.0674653052406</td>
+      <td>29.88508272180072</td>
+    </tr>
+    <tr>
+      <td>Ridge</td>
+      <td>{'model__alpha': 0.22229964825261955, 'preprocessor__Scalers': MaxAbsScaler()}</td>
+      <td>0.7333630151896504</td>
+      <td>6151.999268327973</td>
+      <td>37847094.997507915</td>
+      <td>4237.145610476048</td>
+      <td>42.61134963444237</td>
+    </tr>
+    <tr>
+      <td>ElasticNet</td>
+      <td>{'model__alpha': 10.0, 'model__l1_ratio': 1.0, 'preprocessor__Scalers': StandardScaler()}</td>
+      <td>0.7329945318374282</td>
+      <td>6156.248728802225</td>
+      <td>37899398.41087901</td>
+      <td>4249.7767496117995</td>
+      <td>42.91142876167054</td>
+    </tr>
+    <tr>
+      <td>Lasso</td>
+      <td>{'model__alpha': 79.06043210907701, 'preprocessor__Scalers': 'passthrough'}</td>
+      <td>0.7324664045412573</td>
+      <td>6162.3341413513635</td>
+      <td>37974362.06966465</td>
+      <td>4278.630700109876</td>
+      <td>43.291331425007854</td>
+    </tr>
+    <tr>
+      <td>SVR</td>
+      <td>{'model__C': 100, 'model__epsilon': 0.01, 'model__gamma': 'scale', 'model__kernel': 'linear', 'preprocessor__Scalers': 'passthrough'}</td>
+      <td>0.5177601735345919</td>
+      <td>8273.468496167947</td>
+      <td>68450280.95708351</td>
+      <td>4132.286852966073</td>
+      <td>20.584303381290006</td>
+    </tr>
+    <tr>
+      <td>SVR (log)</td>
+      <td>{'model__C': 100, 'model__epsilon': 0.01, 'model__gamma': 'scale', 'model__kernel': 'linear', 'preprocessor__Scalers': 'passthrough'}</td>
+      <td>0.5177601735345919</td>
+      <td>8273.468496167947</td>
+      <td>68450280.95708351</td>
+      <td>4132.286852966073</td>
+      <td>20.584303381290006</td>
+    </tr>
+    <tr>
+      <td>ElasticNet (log)</td>
+      <td>{'model__alpha': 0.001, 'model__l1_ratio': 0.1, 'preprocessor__Scalers': MinMaxScaler()}</td>
+      <td>0.48504832538122666</td>
+      <td>8549.472461482976</td>
+      <td>73093479.36965577</td>
+      <td>4455.1651664431065</td>
+      <td>28.958829237146627</td>
+    </tr>
+    <tr>
+      <td>Ridge (log)</td>
+      <td>{'model__alpha': 0.4498432668969444, 'preprocessor__Scalers': MaxAbsScaler()}</td>
+      <td>0.48083545024635677</td>
+      <td>8584.373302695243</td>
+      <td>73691465.00002685</td>
+      <td>4465.5236375317645</td>
+      <td>28.926846764259377</td>
+    </tr>
+    <tr>
+      <td>Lasso (log)</td>
+      <td>{'model__alpha': 0.001, 'preprocessor__Scalers': 'passthrough'}</td>
+      <td>0.47346081417127706</td>
+      <td>8645.12802586575</td>
+      <td>74738238.58360945</td>
+      <td>4481.6768623895705</td>
+      <td>28.892651672024307</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<div class="table-card">
+                    <h3>Métriques des modèles non linéaires sur les données d'entrainement</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>R2_train</th>
+      <th>RMSE_train</th>
+      <th>MSE_train</th>
+      <th>MAE_train</th>
+      <th>MAPE_train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Random Forest (log)</td>
+      <td>0.886854796610126</td>
+      <td>4087.941742778311</td>
+      <td>16711267.692349376</td>
+      <td>1833.7503853643047</td>
+      <td>14.131249669327458</td>
+    </tr>
+    <tr>
+      <td>Decision Tree (log)</td>
+      <td>0.8770639005425712</td>
+      <td>4261.145258224885</td>
+      <td>18157358.911692422</td>
+      <td>2057.434280094173</td>
+      <td>17.104628562748367</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>0.8770639005425712</td>
+      <td>4261.145258224885</td>
+      <td>18157358.911692422</td>
+      <td>2057.434280094173</td>
+      <td>17.104628562748367</td>
+    </tr>
+    <tr>
+      <td>Decision Tree</td>
+      <td>0.8835116142928354</td>
+      <td>4147.8967539322675</td>
+      <td>17205047.48128184</td>
+      <td>2293.2745798350547</td>
+      <td>25.24406051117099</td>
+    </tr>
+    <tr>
+      <td>Ridge</td>
+      <td>0.7544606034406457</td>
+      <td>6022.089648591611</td>
+      <td>36265563.73567423</td>
+      <td>4135.3736860706</td>
+      <td>41.23562417356308</td>
+    </tr>
+    <tr>
+      <td>ElasticNet</td>
+      <td>0.754438197122058</td>
+      <td>6022.364410570726</td>
+      <td>36268873.09370889</td>
+      <td>4142.605407941311</td>
+      <td>41.48023215540219</td>
+    </tr>
+    <tr>
+      <td>Lasso</td>
+      <td>0.7535910585411695</td>
+      <td>6032.743436805367</td>
+      <td>36393993.374318235</td>
+      <td>4171.016540072817</td>
+      <td>42.09741313322811</td>
+    </tr>
+    <tr>
+      <td>SVR</td>
+      <td>0.5375687526209614</td>
+      <td>8264.378716393467</td>
+      <td>68299955.56797732</td>
+      <td>3851.1427430131234</td>
+      <td>18.322125307126143</td>
+    </tr>
+    <tr>
+      <td>SVR (log)</td>
+      <td>0.5375687526209614</td>
+      <td>8264.378716393467</td>
+      <td>68299955.56797732</td>
+      <td>3851.1427430131234</td>
+      <td>18.322125307126143</td>
+    </tr>
+    <tr>
+      <td>ElasticNet (log)</td>
+      <td>0.547489167375772</td>
+      <td>8175.251357464653</td>
+      <td>66834734.75772765</td>
+      <td>4108.056699271158</td>
+      <td>25.57004203510631</td>
+    </tr>
+    <tr>
+      <td>Ridge (log)</td>
+      <td>0.542735462529669</td>
+      <td>8218.080387043452</td>
+      <td>67536845.24790826</td>
+      <td>4125.685585277967</td>
+      <td>25.58135076890001</td>
+    </tr>
+    <tr>
+      <td>Lasso (log)</td>
+      <td>0.5413214677096324</td>
+      <td>8230.776925540666</td>
+      <td>67745688.79801266</td>
+      <td>4132.677186961199</td>
+      <td>25.497476071553848</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+
+            <div id="bivariee" class="eda-card">
+                <h4>Modèles ensemblistes</h4>
+                <p>
+                    Les tableaux ci-dessous récapitulent les résultats des métriques obtenus sur les modèles ensemblistes, sur les données de test et d'entrainement.
+                </p>
+                <div class="table-card">
+                    <h3>Métriques des modèles ensemblistes sur les données de test</h3>
+                    <table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>MAE_Test</th>
+      <th>MSE_Test</th>
+      <th>RMSE_Test</th>
+      <th>R2_Test</th>
+      <th>MAPE(%)_Test</th>
+      <th>Best_Params</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>CatBoost</td><td>2561.43</td><td>22290600.39</td><td>4721.29</td><td>0.8430</td><td>30.97</td><td>{'depth':4,'iter':200,'lr':0.03}</td></tr>
+    <tr><td>CatBoost sans onehot</td><td>2588.98</td><td>22394345.44</td><td>4732.27</td><td>0.8422</td><td>31.74</td><td>{'cat_features':[...]}</td></tr>
+    <tr><td>GradientBoosting</td><td>2611.93</td><td>22629964.22</td><td>4757.10</td><td>0.8406</td><td>30.09</td><td>{'lr':0.1,'depth':2}</td></tr>
+    <tr><td>XGBoost</td><td>2573.95</td><td>22667860.64</td><td>4761.08</td><td>0.8403</td><td>28.41</td><td>{'depth':3,'n_estimators':200}</td></tr>
+    <tr><td>LightGBM (Log)</td><td>2183.61</td><td>23185389.23</td><td>4815.12</td><td>0.8367</td><td>17.90</td><td>{'num_leaves':15}</td></tr>
+    <tr><td>XGBoost (Log)</td><td>2146.59</td><td>23273212.36</td><td>4824.23</td><td>0.8360</td><td>17.54</td><td>{'depth':3}</td></tr>
+    <tr><td>LightGBM</td><td>2616.14</td><td>23529818.04</td><td>4850.75</td><td>0.8342</td><td>30.13</td><td>{'num_leaves':15}</td></tr>
+    <tr><td>AdaBoost (Log)</td><td>2930.90</td><td>23655463.02</td><td>4863.69</td><td>0.8333</td><td>34.55</td><td>{'n_estimators':50}</td></tr>
+    <tr><td>RandomForest (Log)</td><td>2273.36</td><td>23849047.36</td><td>4883.55</td><td>0.8320</td><td>18.90</td><td>{'n_estimators':200}</td></tr>
+    <tr><td>CatBoost Log sans onehot</td><td>2307.40</td><td>23892103.42</td><td>4887.95</td><td>0.8317</td><td>18.21</td><td>{'depth':6}</td></tr>
+    <tr><td>LightGBM Log sans onehot</td><td>2304.87</td><td>24022457.82</td><td>4901.27</td><td>0.8308</td><td>18.78</td><td>{'num_leaves':31}</td></tr>
+    <tr><td>GradientBoosting (Log)</td><td>2280.25</td><td>24111727.73</td><td>4910.37</td><td>0.8301</td><td>18.12</td><td>{'depth':3}</td></tr>
+    <tr><td>CatBoost (Log)</td><td>2415.16</td><td>24568172.05</td><td>4956.63</td><td>0.8269</td><td>18.59</td><td>{'depth':4}</td></tr>
+    <tr><td>RandomForest</td><td>2699.04</td><td>24783683.49</td><td>4978.32</td><td>0.8254</td><td>31.26</td><td>{'n_estimators':100}</td></tr>
+    <tr><td>LightGBM sans onehot</td><td>2756.67</td><td>25436574.96</td><td>5043.47</td><td>0.8208</td><td>31.49</td><td>{'num_leaves':31}</td></tr>
+    <tr><td>AdaBoost</td><td>4088.54</td><td>26602583.27</td><td>5157.77</td><td>0.8126</td><td>66.54</td><td>{'n_estimators':50}</td></tr>
+  </tbody>
+</table>
+
+                </div>
+                <br>
+                <div class="table-card">
+                    <h3>Métriques des modèes ensemblistes sur les données d'entrainement</h3>
+                    <table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>MAE_Train</th>
+      <th>MSE_Train</th>
+      <th>RMSE_Train</th>
+      <th>R2_Train</th>
+      <th>MAPE(%)_Train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>CatBoost</td><td>2275.01</td><td>17345288.29</td><td>4164.77</td><td>0.8826</td><td>26.90</td></tr>
+    <tr><td>CatBoost sans onehot</td><td>2313.16</td><td>17892673.06</td><td>4229.97</td><td>0.8789</td><td>27.62</td></tr>
+    <tr><td>GradientBoosting</td><td>2229.05</td><td>16833836.44</td><td>4102.91</td><td>0.8860</td><td>25.10</td></tr>
+    <tr><td>XGBoost</td><td>2120.80</td><td>15649098.23</td><td>3955.89</td><td>0.8940</td><td>24.20</td></tr>
+    <tr><td>LightGBM (Log)</td><td>1765.01</td><td>15982071.39</td><td>3997.76</td><td>0.8918</td><td>13.51</td></tr>
+    <tr><td>XGBoost (Log)</td><td>1825.15</td><td>17453229.78</td><td>4177.71</td><td>0.8818</td><td>14.21</td></tr>
+    <tr><td>LightGBM</td><td>2011.46</td><td>13833684.33</td><td>3719.37</td><td>0.9063</td><td>23.14</td></tr>
+    <tr><td>AdaBoost (Log)</td><td>2704.61</td><td>19744562.15</td><td>4443.49</td><td>0.8663</td><td>31.25</td></tr>
+    <tr><td>RandomForest (Log)</td><td>1664.87</td><td>14590767.98</td><td>3819.79</td><td>0.9012</td><td>12.79</td></tr>
+    <tr><td>CatBoost Log sans onehot</td><td>1997.22</td><td>19126039.39</td><td>4373.33</td><td>0.8705</td><td>14.53</td></tr>
+    <tr><td>LightGBM Log sans onehot</td><td>1630.50</td><td>13447205.83</td><td>3667.04</td><td>0.9090</td><td>12.63</td></tr>
+    <tr><td>GradientBoosting (Log)</td><td>1736.65</td><td>15465458.81</td><td>3932.61</td><td>0.8953</td><td>12.99</td></tr>
+    <tr><td>CatBoost (Log)</td><td>2066.15</td><td>20015805.53</td><td>4473.90</td><td>0.8645</td><td>15.23</td></tr>
+    <tr><td>RandomForest</td><td>1923.67</td><td>12781419.60</td><td>3575.11</td><td>0.9135</td><td>20.99</td></tr>
+    <tr><td>LightGBM sans onehot</td><td>1870.05</td><td>11087630.40</td><td>3329.81</td><td>0.9249</td><td>21.79</td></tr>
+    <tr><td>AdaBoost</td><td>3782.77</td><td>22327309.47</td><td>4725.18</td><td>0.8488</td><td>60.33</td></tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Projet académique — Année 2025/2026</p>
+    </footer>
+    <script src="JS/EDA.js"></script>
+
+</body>
+</html>
