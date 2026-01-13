@@ -3,6 +3,9 @@ from pydantic import BaseModel
 from typing import Dict, Any
 import pandas as pd
 import joblib
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 APP_TITLE = "Medical Cost Prediction API"
 MODEL_PATH = "best_pipeline.pkl"
@@ -10,7 +13,13 @@ MODEL_PATH = "best_pipeline.pkl"
 FEATURES = ["age", "sex", "bmi", "children", "smoker", "region"]
 
 app = FastAPI(title=APP_TITLE)
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # ou mets l'URL exacte de ton site au lieu de *
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Load pipeline once at startup
 try:
     pipeline = joblib.load(MODEL_PATH)
@@ -59,3 +68,4 @@ def predict(req: PredictRequest):
         raise HTTPException(status_code=500, detail=f"Prediction failed: {e}")
 
     return {"prediction": pred_value}
+
