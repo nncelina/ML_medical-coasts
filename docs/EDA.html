@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Projet - Machine learning - EDA</title>
+    <link rel="stylesheet" href="CSS/Style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Machine Learning</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="EDA.html"  class="active">EDA</a></li>
+            <li><a href="Modèles.html">Modèles</a></li>
+            <li><a href="Prédiction.html">Prédiction</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Projet de Machine Learning</h1>
+            <h2>
+                Prévision des coûts médicaux (en $)
+                <span class="badge">Régression</span>
+            </h2>
+
+            <div class="decor-bars">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <p class="subtitle">
+                Analyse exploratoire des données
+            </p>
+        </div>
+    </header>
+
+    <section class="section">
+
+        <!-- SOUS-ONGLETS EDA -->
+        <div class="eda-tabs">
+            <a href="#presentation" class="eda-tab active">
+                Présentation de la base
+            </a>
+
+            <a href="#univariee" class="eda-tab">
+                Analyse univariée
+            </a>
+
+            <a href="#bivariee" class="eda-tab">
+                Analyse bivariée
+            </a>
+
+            <a href="#cible" class="eda-tab">
+                Variable cible
+            </a>
+        </div>
+
+        <!-- CONTENU -->
+        <div class="eda-content">
+
+            <div id="presentation" class="eda-card">
+                <h4>Présentation de la base de données</h4>
+                <p>
+                   La base de données exploitée provient de <strong>Kaggle</strong>, une plateforme de référence pour l’accès à des jeux de données publics.
+                   Elle concerne le domaine de l’assurance santé et se caractérise par les éléments suivants :
+                </p>
+                <ul>
+                    <li><strong>Taille de l’échantillon :</strong> 1 337 observations (après suppression du doublon) représentant des individus assurés.</li>
+                    <li><strong>Nombre de variables :</strong> 7 colonnes comprenant les caractéristiques des assurés ainsi que la variable cible.</li>
+                    <li><strong>Qualité des données :</strong> Le jeu de données est complet et ne présente aucune valeur manquante sur l’ensemble des observations.</li>
+                </ul>
+                <br>
+                <div class="table-card">
+                    <h3>Statistiques descriptives</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>age</th>
+                                <th>bmi</th>
+                                <th>children</th>
+                                <th>charges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>count</td>
+                                <td>1337.000000</td>
+                                <td>1337.000000</td>
+                                <td>1337.000000</td>
+                                <td>1337.000000</td>
+                            </tr>
+                            <tr>
+                                <td>mean</td>
+                                <td>39.222139</td>
+                                <td>30.663452</td>
+                                <td>1.095737</td>
+                                <td>13279.121487</td>
+                            </tr>
+                            <tr>
+                                <td>std</td>
+                                <td>14.044333</td>
+                                <td>6.100468</td>
+                                <td>1.205571</td>
+                                <td>12110.359656</td>
+                            </tr>
+                            <tr>
+                                <td>min</td>
+                                <td>18.000000</td>
+                                <td>15.960000</td>
+                                <td>0.000000</td>
+                                <td>1121.873900</td>
+                            </tr>
+                            <tr>
+                                <td>25%</td>
+                                <td>27.000000</td>
+                                <td>26.290000</td>
+                                <td>0.000000</td>
+                                <td>4746.344000</td>
+                                </tr>
+                            <tr>
+                                <td>50%</td>
+                                <td>39.000000</td>
+                                <td>30.400000</td>
+                                <td>1.000000</td>
+                                <td>9386.161300</td>
+                            </tr>
+                            <tr>
+                                <td>75%</td>
+                                <td>51.000000</td>
+                                <td>34.700000</td>
+                                <td>2.000000</td>
+                                <td>16657.717450</td>
+                            </tr>
+                            <tr>
+                                <td>max</td>
+                                <td>64.000000</td>
+                                <td>53.130000</td>
+                                <td>5.000000</td>
+                                <td>63770.428010</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="univariee" class="eda-card">
+                <h4>Analyse univariée</h4>
+                <p>
+                    Cette partie permet d'examiner la distribution de chaque variable de manière isolée pour identifier les tendances de l'échantillon :
+                </p>
+                <ul>
+                    <li><strong>Âge :</strong> Concentration importante de jeunes adultes (18-19 ans), puis répartition uniforme.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Distribution de l'Âge</strong></p>
+                        <img src="Plot/Eda/age.png" alt="Distribution Age" style="width: 75%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                    <li><strong>BMI (IMC) :</strong> Distribution normale centrée autour de 30 (moyenne en zone de surpoids).</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Distribution de l'IMC (BMI)</strong></p>
+                        <img src="Plot/Eda/bmi.png" alt="Distribution BMI" style="width: 75%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                    <li><strong>Fumeur :</strong> Une nette minorité de fumeurs (environ 20% de l'échantillon).</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Distribution de fumeur</strong></p>
+                        <img src="Plot/Eda/smoker.png" alt="Distribution Smoker" style="width: 45%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                    <li><strong>Charges :</strong> Forte asymétrie vers la droite (la majorité des primes sont inférieures à 15 000$).</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Variable cible : charges</strong></p>
+                        <img src="Plot/Eda/charges.png" alt="Distribution Charges" style="width: 75%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                    <li><strong>Sexe :</strong> Répartition équilibrée.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Distribution de sexe</strong></p>
+                        <img src="Plot/Eda/sexe.png" alt="Distribution Sexe" style="width: 45%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                     <li><strong>Région :</strong> Répartition équilibrée entre les différentes catégories.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Distribution de region</strong></p>
+                        <img src="Plot/Eda/region.png" alt="Distribution Region" style="width: 45%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                     <li><strong>Children :</strong> </li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <p><strong>Distribution de children</strong></p>
+                        <img src="Plot/Eda/children.png" alt="Distribution Children" style="width: 75%; border-radius: 5px; border: 1px solid #ddd;">
+                     </div>
+                </ul>
+            </div>
+
+            <div id="bivariee" class="eda-card">
+                <h4>Analyse bivariée</h4>
+                <p>
+                    Cette section explore l'influence des différentes caractéristiques sur <strong>variable cible (charges)</strong> afin d'identifier les principaux leviers de coût :
+                </p>
+                <br>
+                <ul>
+                    <li><strong>Variable Fumeur :</strong> C'est le facteur le plus discriminant. Les fumeurs présentent des charges nettement plus élevées, avec une rupture nette entre les deux groupes.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/smoker_charges.png" alt="Distribution smoker_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                    <li><strong>Âge et Charges :</strong> Il existe une corrélation positive claire ; le coût de l'assurance augmente de manière constante et linéaire avec le vieillissement.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/age_charges.png" alt="Distribution age_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                    <li><strong>IMC (BMI) et charges :</strong> L'impact de l'IMC est particulièrement marqué chez les fumeurs. On observe que les individus fumeurs ayant un IMC > 30 subissent les charges les plus extrêmes.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/bmi_charges.png" alt="Distribution bmi_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                    <li><strong>Nombre d'enfants et charges :</strong> On note une légère augmentation des charges pour les assurés ayant 2 ou 3 enfants, bien que l'impact soit moins prononcé que le tabagisme.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/charges_children.png" alt="Distribution children_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                    <li><strong>Sexe et charges :</strong> Ces variables montrent une influence marginale sur le montant moyen des primes, indiquant une tarification relativement équitable sur ces critères.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/sexe_charges.png" alt="Distribution sexe_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                    <li><strong> Région et charges :</strong> Ces variables montrent une influence marginale sur le montant moyen des primes, indiquant une tarification relativement équitable sur ces critères.</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/region_charges.png" alt="Distribution region_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                    <li><strong> Corrélation des variable :</strong> La matrice de correlation suivante a été obtenue :</li>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="Plot/Eda/corr.png" alt="Distribution region_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                </ul>
+            </div>
+
+            <div id="cible" class="eda-card">
+                <h4>Analyse de la variable cible</h4>
+                <p>
+                    La variable <strong>charges</strong> représente les coûts de santé individuels facturés par l'assurance. Son analyse est cruciale car elle constitue l'objectif de prédiction de nos modèles :
+                </p>
+                <div style="flex: 1; min-width: 300px; text-align: center;">
+                    <img src="Plot/Eda/charges.png" alt="Distribution charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                </div>
+                <p>
+                    <li><strong>Assymétrie :</strong> La distribution est fortement étalée vers la droite (skewed), avec une majorité de primes inférieures à 15 000$.</li>
+                    <li><strong>Valeurs Extrêmes :</strong> Le boxplot révèle de nombreuses valeurs atypiques au-delà de 35 000$.</li>
+                    <li><strong>Normalisation :</strong> La transformation en <em>log_charges</em> permet d'obtenir une distribution plus "normale" (en cloche), facilitant l'apprentissage pour certains modèles de régression.
+                    <br>
+                    <br>En raison de son étalement, une transformation logarithmique (<strong>log_charges</strong>) a été testée pour normaliser la distribution et améliorer la précision des modèles de régression.
+                </p>
+                <div style="flex: 1; min-width: 300px; text-align: center;">
+                    <img src="Plot/Eda/log_charges.png" alt="Distribution log_charges" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section class="section">
+        <h3>Rapport automatique</h3>
+        <p>
+           Un rapport de profiling automatique a été généré à l’aide de la librairie ydata_profiling. Ce rapport fournit une analyse détaillée des distributions, des corrélations, des valeurs extrêmes et des interactions potentielles entre variables, en complément de l’analyse exploratoire manuelle réalisée précédemment.
+        </p>
+        <br>
+        <a href="report.html" target="_blank" class="eda-tab report">
+                Profiling report
+        </a>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Projet académique — Année 2025/2026</p>
+    </footer>
+
+    <script src="JS/EDA.js"></script>
+
+</body>
+</html>
