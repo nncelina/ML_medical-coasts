@@ -1,123 +1,109 @@
-## Présentation générale du projet
+# 💊 Prédiction des coûts médicaux 
+### *Machine Learning – Analyse, Modélisation & Déploiement*
 
-Ce projet a pour objectif de **prédire les dépenses médicales annuelles individuelles (`charges`)** à partir de caractéristiques socio-démographiques et comportementales issues du jeu de données *Insurance* (Kaggle).L’ensemble du travail est implémenté en **Python** et documenté via **Jupyter Notebook** et **Bookdown**.
+Ce projet vise à **prédire les dépenses médicales annuelles** à partir de caractéristiques socio-démographiques, en mobilisant des **méthodes de Machine Learning**.
+
 ---
-
 ## Objectifs
-
-- Comprendre la structure et les déterminants des dépenses médicales.
-- Mettre en œuvre et comparer plusieurs approches de régression :
-  - modèles linéaires,
-  - modèles non linéaires,
-  - méthodes ensemblistes.
-- Étudier l’impact :
-  - du prétraitement des variables,
-  - de la transformation de la variable cible,
-  - du réglage des hyperparamètres.
-- Identifier les modèles les plus adaptés selon :
-  - la minimisation de l’erreur absolue (RMSE),
-  - la minimisation de l’erreur relative (MAPE).
+- Comparer **modèles linéaires, non linéaires et ensemblistes**
+- Évaluer l’impact :
+  - de la transformation logarithmique de la cible,
+  - du prétraitement des variables catégorielles,
+  - des stratégies de régularisation
+- Sélectionner les **meilleurs modèles prédictifs**
+- Déployer une **API de prédiction** et une **interface web utilisateur**
+- Fournir une **documentation technique complète** (Bookdown)
 
 ---
+## Livrables
+
+### Documentation technique (Bookdown)  
+https://sarahlaure.github.io/Analyse_Assurance_Sante/
+
+### Canva
+Support de présentation
+
+### API de prédiction
+https://ml-medical-coasts-kz1m.onrender.com
+
+### Interface web
+https://comforting-sherbet-b5f901.netlify.app/
+
+---
+## Données utilisées
+
+- **Source** : Kaggle – *Medical Cost Personal Dataset*
+- **Observations** : 1 338 individus
+- **Variable cible** :
+  - `charges` : dépenses médicales annuelles (USD)
+
+### Variables explicatives
+
+| Type | Variables |
+|----|----|
+| Numériques | `age`, `bmi`, `children` |
+| Catégorielles | `sex`, `smoker`, `region` |
+
+Une vérification systématique de la qualité des données a été réalisée :
+- **aucune valeur manquante** n’a été détectée ;
+- **un doublon exact** a été identifié et supprimé par précaution
 
 ## Structure du dépôt
 
 ```text
-├── notebooks/
-│   ├── 01_eda.ipynb                   # Analyse exploratoire (EDA)
-│   ├── 02_modeles_lineaires.ipynb     # Modèles linéaires
-│
-├── results/
-│   ├── metrics_lineaires.csv
-│   ├── metrics_non_lineaires.csv
-│   ├── metrics_ensemblistes.csv
-│
-├── images/
-│   ├── eda/                           # Graphiques EDA
-│   ├── diagnostics/                  # Résidus, tests, VIF
-│
-├── bookdown/
-│   ├── index.Rmd                     # Fichier principal Bookdown
-│   ├── eda.Rmd                       # Chapitre EDA
-│   ├── modeles_lineaires.Rmd         # Modèles linéaires
-│   ├── modeles_non_lineaires.Rmd     # Modèles non linéaires
-│   ├── methodes_ensemblistes.Rmd     # Méthodes ensemblistes
-│   ├── conclusion.Rmd                # Conclusion et perspectives
-│
-├── requirements.txt                  # Dépendances Python
-├── README.md                         # Documentation du projet
-└── LICENSE
+ML_medical-coasts/
+├── API/
+│   ├── app.py              # Application FastAPI (moteur de prédiction)
+│   ├── requirements.txt    # Dépendances pour le déploiement Render
+│   └── best_pipeline.pkl           # Meilleur modèle CatBoost sérialisé
+├── EDA/
+│   ├── EDA.ipynb           # Notebook d'analyse exploratoire
+│   └── figures/            # Graphiques exportés
+├── Modélisation/
+│   ├── modelisation.ipynb # Modèles linéaires et diagnostics + KNN, SVR, Arbres + Modèles de boosting et forêts aléatoires
+├── Power point/
+│   └── presentation_canva.pdf   # Support de présentation
+├── docs/ (Site Web - GitHub Pages)
+│   ├── index.html          # Page d'accueil du site
+│   ├── EDA.html            # Rapport d'analyse exploratoire
+│   ├── Modèles.html        # Rapport de modélisation
+│   ├── Prédiction.html     # Interface des résultats
+│   ├── CSS/ & JS/          # Ressources de mise en forme et scripts
+│   └── Plot/Eda/           # Visualisations interactives du site
+├── README.md               # Documentation principale
 ```
-
-# Description des données et méthodologie
-
-## Description des données
-- **Nombre d’observations** : 1 338 individus  
-- **Variable cible** :
-  - `charges` : dépenses médicales annuelles (en dollars américains)
-
-### Variables explicatives
-- **Variables numériques**
-  - `age` : âge de l’assuré
-  - `bmi` : indice de masse corporelle (*Body Mass Index*)
-  - `children` : nombre d’enfants à charge
-
-- **Variables catégorielles**
-  - `sex` : sexe de l’assuré
-  - `smoker` : statut tabagique
-  - `region` : région de résidence
-
-Une vérification systématique de la qualité des données a été réalisée :
-- **aucune valeur manquante** n’a été détectée ;
-- **un doublon exact** a été identifié et supprimé par précaution.
----
 
 ## Méthodologie générale
 
-### 1. Analyse exploratoire des données (EDA)
+### Analyse exploratoire (EDA)
+- Analyses univariées et bivariées
+- Étude des distributions et de l’asymétrie
+- Visualisations : histogrammes, boxplots, scatterplots
+- Test statistique de Mann–Whitney (statut tabagique)
+- Justification de la transformation `log(1 + charges)`
 
-Une analyse exploratoire approfondie a été conduite afin de comprendre la structure des données et les relations entre les variables :
+### Prétraitement
+- Split **Train / Test : 80 % / 20 %**
+- Pipelines `scikit-learn` (anti data leakage)
+- One-Hot Encoding des variables catégorielles
+- Mise à l’échelle optionnelle des variables numériques
+- Transformations apprises uniquement sur *train*
 
-* **Statistiques & Tests** : Analyses univariées, bivariées et tests de Mann-Whitney sur le statut tabagique.
-* **Visualisation** : Identification des tendances via des histogrammes, boxplots et scatterplots.
-* **Insight clé** : Détection d'une forte **asymétrie à droite** des charges, motivant une transformation logarithmique de la cible pour améliorer la précision.
-Cette analyse a mis en évidence une **asymétrie marquée à droite** de la variable `charges`, motivant l’étude d’une transformation logarithmique de la cible.
+### Modélisation
+Deux stratégies comparées :
+- prédiction directe de `charges`
+- prédiction de `log(1 + charges)` avec retransformation
+Hyperparamètres optimisés via **GridSearchCV (CV = 5)**
 
----
-
-### 2. Prétraitement des données
-
-* **Partitionnement** : Découpage fixe **80% train / 20% test** pour une évaluation impartiale.
-* **Pipelines de production** : Automatisation des transformations pour prévenir toute fuite de données (*data leakage*).
-* **Feature Engineering** : Encodage **One-Hot** des variables catégorielles et mise à l'échelle sélective selon les besoins des modèles.
-
----
-
-### 3. Modélisation
-
-- **Modélisation directe de `charges`**  
-   Les prédictions sont directement exprimées en dollars.
-
-- **Modélisation de `log(1 + charges)`**  
-   - Les modèles sont entraînés sur la cible transformée.
-   - Les prédictions sont retranscrites sur l’échelle originale via :
-     \[
-     \widehat{charges} = \exp(\widehat{y}) - 1
-     \]
-
-Les hyperparamètres des modèles sont sélectionnés par **validation croisée à 5 plis** (*GridSearchCV*), appliquée exclusivement sur l’échantillon d’entraînement.
-
----
-
-### 4. Évaluation des performances
-
-Les performances des modèles sont évaluées à l’aide de plusieurs métriques complémentaires, calculées **sur les ensembles d’entraînement et de test** :
-
+### Évaluation
+Métriques reportées sur *train* et *test* :
 - **RMSE** (*Root Mean Squared Error*)  
 - **MSE** (*Mean Squared Error*)  
 - **MAE** (*Mean Absolute Error*)  
 - **\(R^2\)** (*coefficient de détermination*)  
 - **MAPE** (*Mean Absolute Percentage Error*)
+
+--- 
 
 ## Modèles implémentés
 
@@ -129,7 +115,7 @@ Une famille de modèles de référence a été testée (**OLS**, **Ridge**, **La
 ### Algorithmes Non Linéaires
 Pour capturer des relations complexes, nous avons exploré des approches basées sur la proximité et les structures d'arbres :
 * **K-Nearest Neighbors (KNN)** et **SVR**.
-* **Arbres de décision** simples.
+* **Arbres de décision**.
 
 ### Méthodes Ensemblistes (Performances Optimales)
 Ces modèles ont offert les meilleurs résultats grâce à la combinaison d'estimateurs :
@@ -146,7 +132,8 @@ git clone https://github.com/nncelina/ML_medical-coasts.git
 ## Installer les dépendances
 pip install -r requirements.txt
 
-## Auteurs
+---
+## 👥 Auteurs
 * **DIALLO** Cheick Oumar
 * **FALL** Ndeye Ramatoulaye Ndoye
 * **FOGWOUNG DJOUFACK** Sarah-Laure
